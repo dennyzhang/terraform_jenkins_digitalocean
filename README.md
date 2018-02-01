@@ -9,7 +9,7 @@ Define Jenkins job to create and provision digitalocean VMs by terraform
 
 - [vm_with_volume](vm_with_volume): terraform configuration to create VMs with volumes
 - [vm_without_volume](vm_without_volume): terraform configuration to create VMs without volumes
-- [jenkins_job]: Jenkins jobs template
+- [jenkins_job](jenkins_job): Jenkins jobs template
 
 <a href="https://www.dennyzhang.com"><img align="right" width="201" height="268" src="https://raw.githubusercontent.com/USDevOps/mywechat-slack-group/master/images/denny_201706.png"></a>
 
