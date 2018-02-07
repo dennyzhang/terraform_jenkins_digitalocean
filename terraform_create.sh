@@ -4,12 +4,12 @@
 ## Licensed under MIT 
 ##   https://www.dennyzhang.com/wp-content/mit_license.txt
 ##
-## File: terraform_do_create.sh
+## File: terraform_create.sh
 ## Author : Denny <https://www.dennyzhang.com/contact>
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-07 17:49:04>
+## Updated: Time-stamp: <2018-02-07 17:50:49>
 ##-------------------------------------------------------------------
 set -e
 
@@ -36,4 +36,4 @@ cd "$working_dir/$terraform_task_id"
 terraform init
 terraform apply --var="do_token=$do_token"
 terraform show
-## File: terraform_do_create.sh ends
+## File: terraform_create.sh ends
