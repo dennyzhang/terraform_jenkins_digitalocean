@@ -16,7 +16,7 @@ Table of Contents
    * [Create VM With Jenkins job](#create-vm-with-jenkins-job)
 
 # Create VM With pures bash
-- Prepare parameters
+- 1. Prepare parameters
 ```
 export vm_hostname="denny-vm1"
 export machine_flavor="512mb"
@@ -27,19 +27,19 @@ export region="sfo2"
 # export provision_sh="https://raw.githubusercontent.com/DennyZhang/dennytest/master/hashicorp_terraform/userdata.sh"
 ```
 
-- Provision a vm without volumes
+- 2.1 Provision a vm without volumes
 ```
 export terraform_task_id="$vm_hostname"
 bash -e terraform_do_create.sh "$terraform_task_id" "vm_without_volume_example.tf"
 ```
 
-- Provision a vm with volumes
+- 2.2 Provision a vm with volumes
 ```
 export terraform_task_id="$vm_hostname"
 bash -e terraform_do_create.sh "$terraform_task_id" "vm_with_volume_example.tf"
 ```
 
-- [Optional] Destroy
+- 3. [Optional] Destroy
 ```
 export terraform_task_id="$vm_hostname"
 bash -e terraform_do_destroy.sh "$terraform_task_id"
