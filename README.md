@@ -29,19 +29,19 @@ export region="sfo2"
 
 - Provision a vm without volumes
 ```
-terraform_task_id="$vm_hostname"
+export terraform_task_id="$vm_hostname"
 bash -e terraform_do_create.sh "$terraform_task_id" "vm_without_volume_example.tf"
 ```
 
 - Provision a vm with volumes
 ```
-terraform_task_id="$vm_hostname"
+export terraform_task_id="$vm_hostname"
 bash -e terraform_do_create.sh "$terraform_task_id" "vm_with_volume_example.tf"
 ```
 
 - [Optional] Destroy
 ```
-terraform_task_id="$vm_hostname"
+export terraform_task_id="$vm_hostname"
 bash -e terraform_do_destroy.sh "$terraform_task_id"
 ```
 
