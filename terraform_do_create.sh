@@ -4,12 +4,12 @@
 ## Licensed under MIT 
 ##   https://www.dennyzhang.com/wp-content/mit_license.txt
 ##
-## File: terraform_jenkins_digitalocean.sh
+## File: terraform_do_create.sh
 ## Author : Denny <https://www.dennyzhang.com/contact>
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-07 17:34:05>
+## Updated: Time-stamp: <2018-02-07 17:39:34>
 ##-------------------------------------------------------------------
 set -e
 
@@ -40,4 +40,4 @@ terraform_create_vm "$terraform_task_id" "$vm_hostname"
 # terraform init
 # terraform apply --var="do_token=$DO_TOKEN"
 # terraform show
-## File: terraform_jenkins_digitalocean.sh ends
+## File: terraform_do_create.sh ends
