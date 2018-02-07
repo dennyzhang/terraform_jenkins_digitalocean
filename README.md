@@ -9,12 +9,11 @@ Define Jenkins job to create and provision digitalocean VMs by terraform
 
 Table of Contents
 =================
+<a href="https://www.dennyzhang.com"><img align="right" width="201" height="268" src="https://raw.githubusercontent.com/USDevOps/mywechat-slack-group/master/images/denny_201706.png"></a>
 
    * [Basic Intro](#basic-intro)
    * [Create VM With bash](#create-vm-with-bash)
    * [Create VM With Jenkins job](#create-vm-with-jenkins-job)
-
-<a href="https://www.dennyzhang.com"><img align="right" width="201" height="268" src="https://raw.githubusercontent.com/USDevOps/mywechat-slack-group/master/images/denny_201706.png"></a>
 
 # Create VM With bash
 - Prepare parameters
