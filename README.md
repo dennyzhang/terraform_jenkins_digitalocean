@@ -43,7 +43,7 @@ export terraform_task_id="$vm_hostname"
 bash -e terraform_do_create.sh "$terraform_task_id" "vm_with_volume_example.tf"
 ```
 
-- 3. [Optional] Destroy
+- 3 [Optional] Destroy
 ```
 export terraform_task_id="$vm_hostname"
 bash -e terraform_do_destroy.sh "$terraform_task_id"
