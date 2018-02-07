@@ -7,13 +7,55 @@ File me [tickets](https://github.com/DennyZhang/popular-github-template/issues) 
 
 Define Jenkins job to create and provision digitalocean VMs by terraform
 
-- [vm_with_volume](vm_with_volume): terraform configuration to create VMs with volumes
-- [vm_without_volume](vm_without_volume): terraform configuration to create VMs without volumes
-- [jenkins_job](jenkins_job): Jenkins jobs template
-
 ![CreateDigitalOceanVM_job.png](https://raw.githubusercontent.com/dennyzhang/terraform_jenkins_digitalocean/master/CreateDigitalOceanVM_job.png)
 
 <a href="https://www.dennyzhang.com"><img align="right" width="201" height="268" src="https://raw.githubusercontent.com/USDevOps/mywechat-slack-group/master/images/denny_201706.png"></a>
+
+# Create VM without volume
+- Prepare parameters
+```
+export vm_hostname="denny-vm1"
+export machine_flavor="512mb"
+export region="sfo2"
+# export ssh_keys="XXXX"
+# export provision_sh="https://raw.githubusercontent.com/DennyZhang/dennytest/master/hashicorp_terraform/userdata.sh"
+```
+
+- Provision VM
+```
+terraform init
+
+terraform apply --var="do_token=$DO_TOKEN"
+terraform show
+```
+
+- [Optional] Destroy
+```
+terraform destroy -force --var="do_token=$DO_TOKEN"
+```
+
+# Create VM with volumes
+- Prepare parameters
+```
+export vm_hostname="denny-vm1"
+export machine_flavor="512mb"
+export region="sfo2"
+# export ssh_keys="XXXX"
+# export provision_sh="https://raw.githubusercontent.com/DennyZhang/dennytest/master/hashicorp_terraform/userdata.sh"
+```
+
+- Provision VM
+```
+terraform init
+
+terraform apply --var="do_token=$DO_TOKEN"
+terraform show
+```
+
+- [Optional] Destroy
+```
+terraform destroy -force --var="do_token=$DO_TOKEN"
+```
 
 # License
 - Code is licensed under [MIT License](https://www.dennyzhang.com/wp-content/mit_license.txt).

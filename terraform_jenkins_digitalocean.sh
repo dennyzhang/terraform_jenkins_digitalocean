@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-07 17:14:37>
+## Updated: Time-stamp: <2018-02-07 17:29:14>
 ##-------------------------------------------------------------------
 set -e
 
@@ -19,11 +19,10 @@ function get_terraform_task_id() {
 }
 
 function terraform_create_vm() {
-    terraform_task_id=${1?}
-    vm_hostname=${2?}
-    ssh_keys=${3?}
-    volume_list=${4?}
-    provision_sh=${5:-""}
+    vm_hostname=${1?}
+    ssh_keys=${2?}
+    volume_list=${3?}
+    provision_sh=${4:-""}
 }
 
 vm_hostname=${1?}
