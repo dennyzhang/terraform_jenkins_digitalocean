@@ -28,6 +28,7 @@ export region="sfo2"
 ```
 
 - 2.1 Provision a vm without volumes
+
 vm_without_volume_example.tf: [here](vm_without_volume_example.tf)
 ```
 export terraform_task_id="$vm_hostname"
@@ -35,6 +36,7 @@ bash -e terraform_do_create.sh "$terraform_task_id" "vm_without_volume_example.t
 ```
 
 - 2.2 Provision a vm with volumes
+
 vm_with_volume_example.tf: [here](vm_with_volume_example.tf)
 ```
 export terraform_task_id="$vm_hostname"
