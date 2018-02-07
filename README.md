@@ -7,6 +7,13 @@ File me [tickets](https://github.com/DennyZhang/popular-github-template/issues) 
 
 Define Jenkins job to create and provision digitalocean VMs by terraform
 
+Table of Contents
+=================
+
+   * [Basic Intro](#basic-intro)
+   * [Create VM With bash](#create-vm-with-bash)
+   * [Create VM With Jenkins job](#create-vm-with-jenkins-job)
+
 <a href="https://www.dennyzhang.com"><img align="right" width="201" height="268" src="https://raw.githubusercontent.com/USDevOps/mywechat-slack-group/master/images/denny_201706.png"></a>
 
 # Create VM With bash
@@ -42,6 +49,7 @@ terraform destroy -force --var="do_token=$DO_TOKEN"
 
 jenkins_job/config.xml: [here](jenkins_job/config.xml)
 
-# License
-- Code is licensed under [MIT License](https://www.dennyzhang.com/wp-content/mit_license.txt).
+- License
+
+Code is licensed under [MIT License](https://www.dennyzhang.com/wp-content/mit_license.txt).
 <a href="https://www.dennyzhang.com"><img align="right" width="185" height="37" src="https://raw.githubusercontent.com/USDevOps/mywechat-slack-group/master/images/dns_small.png"></a>
