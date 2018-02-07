@@ -7,59 +7,40 @@ File me [tickets](https://github.com/DennyZhang/popular-github-template/issues) 
 
 Define Jenkins job to create and provision digitalocean VMs by terraform
 
-![CreateDigitalOceanVM_job.png](https://raw.githubusercontent.com/dennyzhang/terraform_jenkins_digitalocean/master/CreateDigitalOceanVM_job.png)
-
 <a href="https://www.dennyzhang.com"><img align="right" width="201" height="268" src="https://raw.githubusercontent.com/USDevOps/mywechat-slack-group/master/images/denny_201706.png"></a>
 
-# Create VM without volume
+# Create VM With bash
 - Prepare parameters
 ```
 export vm_hostname="denny-vm1"
 export machine_flavor="512mb"
 export region="sfo2"
 # export ssh_keys="XXXX"
+# export do_token="XXX"
 # export provision_sh="https://raw.githubusercontent.com/DennyZhang/dennytest/master/hashicorp_terraform/userdata.sh"
 ```
 
-- Provision VM
+- Provision a vm without volumes
 ```
-terraform init
-
-terraform apply --var="do_token=$DO_TOKEN"
-terraform show
-```
-
-- [Optional] Destroy
-```
-terraform destroy -force --var="do_token=$DO_TOKEN"
-```
-
-# Create VM with volumes
-- Prepare parameters
-```
-export vm_hostname="denny-vm1"
-export machine_flavor="512mb"
-export region="sfo2"
-# export ssh_keys="XXXX"
-# export provision_sh="https://raw.githubusercontent.com/DennyZhang/dennytest/master/hashicorp_terraform/userdata.sh"
-```
-
-- Provision VM
-```
-terraform init
-
 terraform_task_id="$vm_hostname"
-
 bash terraform_jenkins_digitalocean.sh "$terraform_task_id" "vm_without_volume_example.tf"
+```
 
-terraform apply --var="do_token=$DO_TOKEN"
-terraform show
+- Provision a vm with volumes
+```
+terraform_task_id="$vm_hostname"
+bash terraform_jenkins_digitalocean.sh "$terraform_task_id" "vm_with_volume_example.tf"
 ```
 
 - [Optional] Destroy
 ```
 terraform destroy -force --var="do_token=$DO_TOKEN"
 ```
+
+# Create VM With Jenkins job
+![CreateDigitalOceanVM_job.png](https://raw.githubusercontent.com/dennyzhang/terraform_jenkins_digitalocean/master/CreateDigitalOceanVM_job.png)
+
+jenkins_job/config.xml: [here](jenkins_job/config.xml)
 
 # License
 - Code is licensed under [MIT License](https://www.dennyzhang.com/wp-content/mit_license.txt).
