@@ -6,7 +6,7 @@ provider "digitalocean" {
 }
 
 resource "digitalocean_droplet" "$vm_hostname" {
-  image  = "ubuntu-14-04-x64"
+  image  = "$vm_image"
   name   = "$vm_hostname"
   region = "$region"
   size   = "$machine_flavor"

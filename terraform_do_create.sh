@@ -9,13 +9,17 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-07 17:39:34>
+## Updated: Time-stamp: <2018-02-07 17:48:29>
 ##-------------------------------------------------------------------
 set -e
 
-function get_terraform_task_id() {
-    localhost vm_hostname=${1?}
-    echo "$vm_hostname"
+function valid_parameters() {
+    # TODO
+    # vm_hostname
+    # machine_flavor
+    # region
+    # ssh_keys
+    # do_token
 }
 
 function terraform_create_vm() {
@@ -25,19 +29,20 @@ function terraform_create_vm() {
     provision_sh=${4:-""}
 }
 
-vm_hostname=${1?}
-ssh_keys=${2?}
-volume_list=${3?}
-provision_sh=${4:-""}
-working_dir=${5:-"."}
+################################################################################
+valid_parameters
 
-cd "$working_dir"
-terraform_task_id=$(get_terraform_task_id "$vm_hostname")
+terraform_task_id=${1?}
+terraform_tf_file=${2?}
+export vm_image="ubuntu-14-04-x64"
+export working_dir="."
+
 mkdir -p "$working_dir/$terraform_task_id"
 cd "$working_dir/$terraform_task_id"
 
 terraform_create_vm "$terraform_task_id" "$vm_hostname"
-# terraform init
-# terraform apply --var="do_token=$DO_TOKEN"
+
+terraform init
+terraform apply --var="do_token=$do_token"
 # terraform show
 ## File: terraform_do_create.sh ends
