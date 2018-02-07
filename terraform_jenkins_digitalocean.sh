@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-07 17:29:14>
+## Updated: Time-stamp: <2018-02-07 17:34:05>
 ##-------------------------------------------------------------------
 set -e
 
@@ -37,4 +37,7 @@ mkdir -p "$working_dir/$terraform_task_id"
 cd "$working_dir/$terraform_task_id"
 
 terraform_create_vm "$terraform_task_id" "$vm_hostname"
+# terraform init
+# terraform apply --var="do_token=$DO_TOKEN"
+# terraform show
 ## File: terraform_jenkins_digitalocean.sh ends

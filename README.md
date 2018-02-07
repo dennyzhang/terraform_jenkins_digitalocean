@@ -48,6 +48,10 @@ export region="sfo2"
 ```
 terraform init
 
+terraform_task_id="$vm_hostname"
+
+bash terraform_jenkins_digitalocean.sh "$terraform_task_id" "vm_without_volume_example.tf"
+
 terraform apply --var="do_token=$DO_TOKEN"
 terraform show
 ```
