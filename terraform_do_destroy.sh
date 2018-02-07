@@ -9,8 +9,9 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-07 17:39:24>
+## Updated: Time-stamp: <2018-02-07 17:49:10>
 ##-------------------------------------------------------------------
 set -e
 
+# TODO
 ## File: terraform_do_destroy.sh ends

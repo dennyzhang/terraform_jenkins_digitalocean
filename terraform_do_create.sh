@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-07 17:48:29>
+## Updated: Time-stamp: <2018-02-07 17:49:04>
 ##-------------------------------------------------------------------
 set -e
 
@@ -20,13 +20,6 @@ function valid_parameters() {
     # region
     # ssh_keys
     # do_token
-}
-
-function terraform_create_vm() {
-    vm_hostname=${1?}
-    ssh_keys=${2?}
-    volume_list=${3?}
-    provision_sh=${4:-""}
 }
 
 ################################################################################
@@ -40,9 +33,7 @@ export working_dir="."
 mkdir -p "$working_dir/$terraform_task_id"
 cd "$working_dir/$terraform_task_id"
 
-terraform_create_vm "$terraform_task_id" "$vm_hostname"
-
 terraform init
 terraform apply --var="do_token=$do_token"
-# terraform show
+terraform show
 ## File: terraform_do_create.sh ends

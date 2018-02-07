@@ -16,7 +16,7 @@ Table of Contents
    * [Create VM With Jenkins job](#create-vm-with-jenkins-job)
 
 # Create VM With pures bash
-- 1. Prepare parameters
+- 1 Prepare parameters
 ```
 export vm_hostname="denny-vm1"
 export machine_flavor="512mb"
