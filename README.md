@@ -28,12 +28,14 @@ export region="sfo2"
 ```
 
 - 2.1 Provision a vm without volumes
+vm_without_volume_example.tf: [here](vm_without_volume_example.tf)
 ```
 export terraform_task_id="$vm_hostname"
 bash -e terraform_do_create.sh "$terraform_task_id" "vm_without_volume_example.tf"
 ```
 
 - 2.2 Provision a vm with volumes
+vm_with_volume_example.tf: [here](vm_with_volume_example.tf)
 ```
 export terraform_task_id="$vm_hostname"
 bash -e terraform_do_create.sh "$terraform_task_id" "vm_with_volume_example.tf"
@@ -46,9 +48,9 @@ bash -e terraform_do_destroy.sh "$terraform_task_id"
 ```
 
 # Create VM With Jenkins job
-![CreateDigitalOceanVM_job.png](https://raw.githubusercontent.com/dennyzhang/terraform_jenkins_digitalocean/master/CreateDigitalOceanVM_job.png)
-
 jenkins_job/config.xml: [here](jenkins_job/config.xml)
+
+![CreateDigitalOceanVM_job.png](https://raw.githubusercontent.com/dennyzhang/terraform_jenkins_digitalocean/master/CreateDigitalOceanVM_job.png)
 
 - License
 
