@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-08 15:56:47>
+## Updated: Time-stamp: <2018-02-08 16:00:08>
 ##-------------------------------------------------------------------
 set -e
 
@@ -63,7 +63,7 @@ resource "digitalocean_droplet" "$vm_hostname" {
 }
 EOF
     terraform apply -auto-approve --var="do_token=$do_token"
-    # terraform show
+    terraform show
 }
 
 ################################################################################
