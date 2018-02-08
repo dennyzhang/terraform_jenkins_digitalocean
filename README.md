@@ -43,7 +43,7 @@ export provision_folder="scripts"
 
 vm_without_volume_example.tf: [here](vm_without_volume_example.tf)
 ```
-bash -e terraform_create.sh "$vm_hostname" "vm_without_volume_example.tf"
+bash -e terraform_create.sh "$vm_hostname" "vm_without_volume_example.tf" "$provision_folder"
 
 ## Sample Console Output:
 ##  digitalocean_droplet.denny-vm1: Creating...
