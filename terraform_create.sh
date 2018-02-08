@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-08 16:21:00>
+## Updated: Time-stamp: <2018-02-08 17:07:22>
 ##-------------------------------------------------------------------
 set -e
 
@@ -33,6 +33,11 @@ function valid_parameters() {
     fi
     if [ -z "$do_token" ]; then
         echo -e "Error: do_token parameter should be given."
+        exit 1
+    fi
+
+    if [ -n "$provision_folder" ] && [ ! -d "$provision_folder" ]; then
+        echo -e "Error: provision_folder is given as $provision_folder. But the folder is not found"
         exit 1
     fi
 }
@@ -72,7 +77,7 @@ function create_vm_without_volume() {
 
 function run_provision_folder() {
     # scp provision folder to root
-    # Then run all bash  script
+    # Then run all bash script
 }
 ################################################################################
 valid_parameters
@@ -88,4 +93,7 @@ mkdir -p "$working_dir/$terraform_task_id"
 cd "$working_dir/$terraform_task_id"
 
 create_vm_without_volume
+# TODO: support creating VM with volumes
+
+run_provision_folder
 ## File: terraform_create.sh ends

@@ -22,7 +22,8 @@ Table of Contents
 ```
 You might have some sensitive credentials, which you don't want to pass through userdata.
 
-Hence here we support you scp a script folder, find all bash scripts by lexicographical order, then run them one by one
+Hence here we support you scp a script folder, find all bash scripts by
+lexicographical order, then run them one by one
 ```
 
 # Create VM With pure bash
@@ -32,7 +33,7 @@ export vm_hostname="denny-vm1"
 export machine_flavor="512mb"
 export region="sfo2"
 export provision_sh="https://raw.githubusercontent.com/DennyZhang/dennytest/master/hashicorp_terraform/userdata.sh"
-export provision_folder=""
+export provision_folder="scripts"
 
 # export ssh_keys="XXXX"
 # export do_token="XXX"
