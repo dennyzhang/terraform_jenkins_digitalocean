@@ -11,19 +11,21 @@ Table of Contents
 
    * [Basic Intro](#basic-intro)
    * [What For?](#what-for)
-   * [Create VM With pures bash](#create-vm-with-pures-bash)
+   * [Create VM With pure bash](#create-vm-with-pure-bash)
    * [Create VM With Jenkins job](#create-vm-with-jenkins-job)
 
 # What For?
 - Support create and provision DigitalOcean VMs from Jenkins GUI
 - Support users to customize the machine flavor, and whether to attach additional volumes
 - Support users to specify the userdata of the VM
-- Support users to run addiontal scripts after the VM provisioning
+- Support users to run adenoidal scripts after the VM provisioning
+```
 You might have some sensitive credentials, which you don't want to pass through userdata.
 
 Hence here we support you scp a script folder, find all bash scripts by lexicographical order, then run them one by one
+```
 
-# Create VM With pures bash
+# Create VM With pure bash
 - 1 Prepare parameters
 ```
 export vm_hostname="denny-vm1"
