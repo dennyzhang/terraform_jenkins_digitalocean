@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-08 17:07:22>
+## Updated: Time-stamp: <2018-02-08 17:10:13>
 ##-------------------------------------------------------------------
 set -e
 
@@ -78,6 +78,8 @@ function create_vm_without_volume() {
 function run_provision_folder() {
     # scp provision folder to root
     # Then run all bash script
+    local provision_folder=${1?}
+    echo "scp $provision_folder folder to /root of the VM"
 }
 ################################################################################
 valid_parameters
@@ -95,5 +97,7 @@ cd "$working_dir/$terraform_task_id"
 create_vm_without_volume
 # TODO: support creating VM with volumes
 
-run_provision_folder
+if [ -n "$provision_folder" ]; then
+    run_provision_folder "$provision_folder"
+fi
 ## File: terraform_create.sh ends
