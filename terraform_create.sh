@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-08 16:00:08>
+## Updated: Time-stamp: <2018-02-08 16:21:00>
 ##-------------------------------------------------------------------
 set -e
 
@@ -37,14 +37,7 @@ function valid_parameters() {
     fi
 }
 
-function create_vm_without_volume() {
-    terraform init
-    if [ -z "$provision_sh" ]; then
-        user_data=""
-    else
-        user_data="#cloud-config\nruncmd:\n - wget -O /root/userdata.sh $provision_sh \n - bash /root/userdata.sh"
-    fi
-
+function prepare_terraform_template() {
     cat > example.tf <<EOF
 variable "do_token" {}
 
@@ -62,15 +55,31 @@ resource "digitalocean_droplet" "$vm_hostname" {
  ssh_keys = [$ssh_keys]
 }
 EOF
+}
+
+function create_vm_without_volume() {
+    terraform init
+    if [ -z "$provision_sh" ]; then
+        user_data=""
+    else
+        user_data="#cloud-config\nruncmd:\n - wget -O /root/userdata.sh $provision_sh \n - bash /root/userdata.sh"
+    fi
+
+    prepare_terraform_template
     terraform apply -auto-approve --var="do_token=$do_token"
     terraform show
 }
 
+function run_provision_folder() {
+    # scp provision folder to root
+    # Then run all bash  script
+}
 ################################################################################
 valid_parameters
 
 terraform_task_id=${1?}
 terraform_tf_file=${2?}
+provision_folder=${3:-""}
 export vm_image="ubuntu-14-04-x64"
 export working_dir="."
 

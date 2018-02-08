@@ -15,9 +15,13 @@ Table of Contents
    * [Create VM With Jenkins job](#create-vm-with-jenkins-job)
 
 # What For?
-- Define Jenkins job to create and provision digitalocean VMs by terraform
-- Customize the machine flavor and also attached volume
-- Support users to scp a script folder to VM, then run them with one enforced convention
+- Support create and provision DigitalOcean VMs from Jenkins GUI
+- Support users to customize the machine flavor, and whether to attach additional volumes
+- Support users to specify the userdata of the VM
+- Support users to run addiontal scripts after the VM provisioning
+You might have some sensitive credentials, which you don't want to pass through userdata.
+
+Hence here we support you scp a script folder, find all bash scripts by lexicographical order, then run them one by one
 
 # Create VM With pures bash
 - 1 Prepare parameters
@@ -26,6 +30,7 @@ export vm_hostname="denny-vm1"
 export machine_flavor="512mb"
 export region="sfo2"
 export provision_sh="https://raw.githubusercontent.com/DennyZhang/dennytest/master/hashicorp_terraform/userdata.sh"
+export provision_folder=""
 
 # export ssh_keys="XXXX"
 # export do_token="XXX"
