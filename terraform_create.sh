@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-08 15:53:08>
+## Updated: Time-stamp: <2018-02-08 15:56:47>
 ##-------------------------------------------------------------------
 set -e
 
@@ -39,6 +39,12 @@ function valid_parameters() {
 
 function create_vm_without_volume() {
     terraform init
+    if [ -z "$provision_sh" ]; then
+        user_data=""
+    else
+        user_data="#cloud-config\nruncmd:\n - wget -O /root/userdata.sh $provision_sh \n - bash /root/userdata.sh"
+    fi
+
     cat > example.tf <<EOF
 variable "do_token" {}
 
@@ -52,7 +58,7 @@ resource "digitalocean_droplet" "$vm_hostname" {
  name = "$vm_hostname"
  region = "$region"
  size = "$machine_flavor"
- user_data = "#cloud-config\nruncmd:\n - wget -O /root/userdata.sh $provision_sh \n - bash /root/userdata.sh"
+ $user_data
  ssh_keys = [$ssh_keys]
 }
 EOF
