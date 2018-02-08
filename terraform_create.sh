@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-08 17:10:13>
+## Updated: Time-stamp: <2018-02-08 17:23:59>
 ##-------------------------------------------------------------------
 set -e
 
@@ -75,11 +75,29 @@ function create_vm_without_volume() {
     terraform show
 }
 
+function get_vm_ip() {
+    # TODO: add error handling
+    terraform show | grep ipv4_address | awk -F'= ' '{print $2}'
+}
+
 function run_provision_folder() {
     # scp provision folder to root
     # Then run all bash script
     local provision_folder=${1?}
+    local vm_ip=${2?}
+
+    # TODO: customize the ssh key
+    local ssh_key_file=${3:-"~/.ssh/id_rsa.pub"}
+    local ssh_username="root"
+    local ssh_folder="/root"
+    local ssh_port="22"
     echo "scp $provision_folder folder to /root of the VM"
+    scp -i -P "$ssh_port" "$ssh_key_file" -r "$provision_folder/*" "$ssh_username@$vm_ip:$ssh_folder"
+
+    for script in $(ls -1 $provision_folder/*.sh); do
+        echo "ssh -p $ssh_port $ssh_username$vm_ip bash /root/$script"
+        ssh -p "$ssh_port" "$ssh_username$vm_ip" "bash -ex /root/$script"
+    done
 }
 ################################################################################
 valid_parameters
@@ -98,6 +116,8 @@ create_vm_without_volume
 # TODO: support creating VM with volumes
 
 if [ -n "$provision_folder" ]; then
-    run_provision_folder "$provision_folder"
+    vm_ip=$(get_vm_ip)
+    cd "$working_dir"
+    run_provision_folder "$provision_folder" "$vm_ip"
 fi
 ## File: terraform_create.sh ends
