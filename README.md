@@ -5,8 +5,6 @@
 
 File me [tickets](https://github.com/DennyZhang/popular-github-template/issues) or star [the repo](https://github.com/DennyZhang/popular-github-template).
 
-Define Jenkins job to create and provision digitalocean VMs by terraform
-
 Table of Contents
 =================
 <a href="https://www.dennyzhang.com"><img align="right" width="201" height="268" src="https://raw.githubusercontent.com/USDevOps/mywechat-slack-group/master/images/denny_201706.png"></a>
@@ -14,6 +12,11 @@ Table of Contents
    * [Basic Intro](#basic-intro)
    * [Create VM With pures bash](#create-vm-with-pures-bash)
    * [Create VM With Jenkins job](#create-vm-with-jenkins-job)
+
+# What For?
+- Define Jenkins job to create and provision digitalocean VMs by terraform
+- Customize the machine flavor and also attached volume
+- Support users to scp a script folder to VM, then run them with one enforced convention
 
 # Create VM With pures bash
 - 1 Prepare parameters
