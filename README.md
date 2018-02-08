@@ -22,8 +22,8 @@ Table of Contents
 ```
 You might have some sensitive credentials, which you don't want to pass through userdata.
 
-Hence here we support you scp a script folder, find all bash scripts by
-lexicographical order, then run them one by one
+Hence here we support you scp a script folder, find all bash scripts whose filename matches main_*.sh
+Then run them one by one in lexicographical order
 ```
 
 # Create VM With pure bash
