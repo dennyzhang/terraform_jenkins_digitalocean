@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-08 17:43:12>
+## Updated: Time-stamp: <2018-02-08 17:59:01>
 ##-------------------------------------------------------------------
 set -e
 
@@ -67,7 +67,7 @@ function create_vm_without_volume() {
     if [ -z "$provision_sh" ]; then
         user_data=""
     else
-        user_data="#cloud-config\nruncmd:\n - wget -O /root/userdata.sh $provision_sh \n - bash /root/userdata.sh"
+        user_data="user_data = \"#cloud-config\nruncmd:\n - wget -O /root/userdata.sh $provision_sh \n - bash /root/userdata.sh\""
     fi
 
     prepare_terraform_template

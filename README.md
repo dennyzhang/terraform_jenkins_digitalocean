@@ -20,9 +20,9 @@ Table of Contents
 - Support users to specify the userdata of the VM
 - Support users to run adenoidal scripts after the VM provisioning
 ```
-You might have some sensitive credentials, which you don't want to pass through userdata.
+You might have some sensitive credentials, which you don't want to pass through userdata in VM creation.
 
-Hence here we support you scp a script folder, find all bash scripts whose filename matches main_*.sh
+Hence here we support you to scp a script folder, find all bash scripts whose filename matches main_*.sh
 Then run them one by one in lexicographical order
 ```
 
