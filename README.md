@@ -44,6 +44,52 @@ export provision_folder="scripts"
 vm_without_volume_example.tf: [here](vm_without_volume_example.tf)
 ```
 bash -e terraform_create.sh "$vm_hostname" "vm_without_volume_example.tf"
+
+## Sample Output:
+##  digitalocean_droplet.denny-vm1: Creating...
+##    disk:                 "" => "<computed>"
+##    image:                "" => "ubuntu-14-04-x64"
+##    ipv4_address:         "" => "<computed>"
+##    ipv4_address_private: "" => "<computed>"
+##    ipv6_address:         "" => "<computed>"
+##    ipv6_address_private: "" => "<computed>"
+##    locked:               "" => "<computed>"
+##    name:                 "" => "denny-vm1"
+##    price_hourly:         "" => "<computed>"
+##    price_monthly:        "" => "<computed>"
+##    region:               "" => "sfo2"
+##    resize_disk:          "" => "true"
+##    size:                 "" => "512mb"
+##    ssh_keys.#:           "" => "3"
+##    ssh_keys.0:           "" => "1968722"
+##    ssh_keys.1:           "" => "979830"
+##    ssh_keys.2:           "" => "812123"
+##    status:               "" => "<computed>"
+##    vcpus:                "" => "<computed>"
+##  digitalocean_droplet.denny-vm1: Still creating... (10s elapsed)
+##  digitalocean_droplet.denny-vm1: Still creating... (20s elapsed)
+##  digitalocean_droplet.denny-vm1: Creation complete after 26s (ID: 81799068)
+##  
+##  Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+##  digitalocean_droplet.denny-vm1:
+##    id = 81799068
+##    disk = 20
+##    image = ubuntu-14-04-x64
+##    ipv4_address = XXX.XXX.XXX.XXX
+##    locked = false
+##    name = denny-vm1
+##    price_hourly = 0.00744
+##    price_monthly = 5
+##    region = sfo2
+##    resize_disk = true
+##    size = 512mb
+##    ssh_keys.# = 3
+##    ssh_keys.0 = XXX23
+##    ssh_keys.1 = XXX32
+##    ssh_keys.2 = XXX34
+##    status = active
+##    tags.# = 0
+##    vcpus = 1
 ```
 
 - 2.2 Provision a vm with volumes
