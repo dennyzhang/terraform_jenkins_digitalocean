@@ -34,22 +34,19 @@ export region="sfo2"
 
 vm_without_volume_example.tf: [here](vm_without_volume_example.tf)
 ```
-export terraform_task_id="$vm_hostname"
-bash -e terraform_create.sh "$terraform_task_id" "vm_without_volume_example.tf"
+bash -e terraform_create.sh "$vm_hostname" "vm_without_volume_example.tf"
 ```
 
 - 2.2 Provision a vm with volumes
 
 vm_with_volume_example.tf: [here](vm_with_volume_example.tf)
 ```
-export terraform_task_id="$vm_hostname"
-bash -e terraform_create.sh "$terraform_task_id" "vm_with_volume_example.tf"
+bash -e terraform_create.sh "$vm_hostname" "vm_without_volume_example.tf"
 ```
 
 - 3 [Optional] Destroy
 ```
-export terraform_task_id="$vm_hostname"
-bash -e terraform_destroy.sh "$terraform_task_id"
+bash -e terraform_destroy.sh "$vm_hostname"
 ```
 
 # Create VM With Jenkins job

@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-07 19:39:30>
+## Updated: Time-stamp: <2018-02-08 15:53:08>
 ##-------------------------------------------------------------------
 set -e
 
@@ -56,7 +56,7 @@ resource "digitalocean_droplet" "$vm_hostname" {
  ssh_keys = [$ssh_keys]
 }
 EOF
-    terraform apply --var="do_token=$do_token"
+    terraform apply -auto-approve --var="do_token=$do_token"
     # terraform show
 }
 
