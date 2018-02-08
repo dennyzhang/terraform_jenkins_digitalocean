@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-07 19:35:28>
+## Updated: Time-stamp: <2018-02-07 19:39:30>
 ##-------------------------------------------------------------------
 set -e
 
@@ -52,7 +52,7 @@ resource "digitalocean_droplet" "$vm_hostname" {
  name = "$vm_hostname"
  region = "$region"
  size = "$machine_flavor"
- user_data = "#cloud-config\nruncmd:\n - wget -O /root/userdata.sh $provision_sh \n - bash /root/mdm_os_provision.sh"
+ user_data = "#cloud-config\nruncmd:\n - wget -O /root/userdata.sh $provision_sh \n - bash /root/userdata.sh"
  ssh_keys = [$ssh_keys]
 }
 EOF
