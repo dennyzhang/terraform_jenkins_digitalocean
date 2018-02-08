@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-08 17:39:39>
+## Updated: Time-stamp: <2018-02-08 17:43:12>
 ##-------------------------------------------------------------------
 set -e
 
@@ -92,9 +92,10 @@ function run_provision_folder() {
     local ssh_folder="/root"
     local ssh_port="22"
     echo "scp $provision_folder folder to /root of VM(vm_ip)"
-    scp -P "$ssh_port" -i "$ssh_key_file" -r $provision_folder "$ssh_username@$vm_ip:$ssh_folder/"
+    scp -P "$ssh_port" -i "$ssh_key_file" -r $provision_folder/* "$ssh_username@$vm_ip:$ssh_folder/"
 
     for script in $(ls -1 $provision_folder/main_*.sh); do
+        script=$(basename "$script")
         echo "ssh -i $ssh_key_file -p $ssh_port $ssh_username$vm_ip \"bash -ex /root/$script\""
         ssh -i "$ssh_key_file" -p "$ssh_port" "$ssh_username@$vm_ip" bash -ex /root/$script
     done
