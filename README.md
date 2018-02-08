@@ -45,7 +45,7 @@ vm_without_volume_example.tf: [here](vm_without_volume_example.tf)
 ```
 bash -e terraform_create.sh "$vm_hostname" "vm_without_volume_example.tf"
 
-## Sample Output:
+## Sample Console Output:
 ##  digitalocean_droplet.denny-vm1: Creating...
 ##    disk:                 "" => "<computed>"
 ##    image:                "" => "ubuntu-14-04-x64"
@@ -61,9 +61,9 @@ bash -e terraform_create.sh "$vm_hostname" "vm_without_volume_example.tf"
 ##    resize_disk:          "" => "true"
 ##    size:                 "" => "512mb"
 ##    ssh_keys.#:           "" => "3"
-##    ssh_keys.0:           "" => "1968722"
-##    ssh_keys.1:           "" => "979830"
-##    ssh_keys.2:           "" => "812123"
+##    ssh_keys.0:           "" => "XXX23"
+##    ssh_keys.1:           "" => "XXX32"
+##    ssh_keys.2:           "" => "XXX34"
 ##    status:               "" => "<computed>"
 ##    vcpus:                "" => "<computed>"
 ##  digitalocean_droplet.denny-vm1: Still creating... (10s elapsed)
@@ -72,7 +72,7 @@ bash -e terraform_create.sh "$vm_hostname" "vm_without_volume_example.tf"
 ##  
 ##  Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 ##  digitalocean_droplet.denny-vm1:
-##    id = 81799068
+##    id = XXX068
 ##    disk = 20
 ##    image = ubuntu-14-04-x64
 ##    ipv4_address = XXX.XXX.XXX.XXX
