@@ -11,7 +11,7 @@ Table of Contents
 
    * [Basic Intro](#basic-intro)
    * [What For?](#what-for)
-   * [Create VM With pure bash](#create-vm-with-pure-bash)
+   * [Create VM With Pure Bash](#create-vm-with-pure-bash)
    * [Create VM With Jenkins job](#create-vm-with-jenkins-job)
 
 # What For?
@@ -26,7 +26,7 @@ Hence here we support you to scp a script folder, find all bash scripts whose fi
 Then run them one by one in lexicographical order
 ```
 
-# Create VM With pure bash
+# Create VM With Pure Bash
 - 1 Prepare parameters
 ```
 export vm_hostname="denny-vm1"
