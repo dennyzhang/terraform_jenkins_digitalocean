@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-09 16:39:24>
+## Updated: Time-stamp: <2018-02-09 16:46:32>
 ##-------------------------------------------------------------------
 set -e
 
@@ -37,8 +37,9 @@ EOF
 function prepare_terraform_with_volume() {
     local volume_list=${1?}
     # TODO: change this
-    volume_name="volume1"
-    volume_size="20"
+    volume_size="10"
+
+    volume_name="${vm_hostname}-volume1"
     cat > example.tf <<EOF
 variable "do_token" {}
 
@@ -61,7 +62,7 @@ resource "digitalocean_droplet" "$vm_hostname" {
  size = "$machine_flavor"
  $user_data
  ssh_keys = [$ssh_keys]
- volume_ids = ["${digitalocean_volume.volume1.id}"]
+ volume_ids = ["\${digitalocean_volume.volume1.id}"]
 }
 EOF
 }
@@ -113,9 +114,9 @@ function terraform_create_vm() {
 
     # TODO: customize volume creation
     if [ -n "$volume_list" ]; then
-       prepare_terraform_without_volume
-    else
        prepare_terraform_with_volume "$volume_list"
+    else
+       prepare_terraform_without_volume
     fi
 
     terraform apply -auto-approve --var="do_token=$do_token"
