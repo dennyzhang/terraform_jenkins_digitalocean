@@ -44,9 +44,8 @@ export ssh_key_file="/tmp/id_rsa"
 
 - 2.1 Provision a vm without volumes
 
-vm_without_volume_example.tf: [here](vm_without_volume_example.tf)
 ```
-bash -e terraform_create.sh "$vm_hostname" "vm_without_volume_example.tf"
+bash -e terraform_create.sh "$vm_hostname"
 
 ## Sample Console Output:
 ##  digitalocean_droplet.denny-vm1: Creating...
@@ -97,9 +96,9 @@ bash -e terraform_create.sh "$vm_hostname" "vm_without_volume_example.tf"
 
 - 2.2 Provision a vm with volumes
 
-vm_with_volume_example.tf: [here](vm_with_volume_example.tf)
+Create a vm with one additional volume of 20GB disk.
 ```
-bash -e terraform_create.sh "$vm_hostname" "vm_without_volume_example.tf"
+bash -e terraform_create.sh "$vm_hostname" "20"
 ```
 
 - 3 [Optional] Destroy
@@ -110,7 +109,7 @@ bash -e terraform_destroy.sh "$vm_hostname"
 # Create VM With Jenkins job
 jenkins_job/config.xml: [here](jenkins_job/config.xml)
 
-![CreateDigitalOceanVM_job.png](https://raw.githubusercontent.com/dennyzhang/terraform_jenkins_digitalocean/master/CreateDigitalOceanVM_job.png)
+![CreateDigitalOceanVM_job.png](https://raw.githubusercontent.com/dennyzhang/terraform_jenkins_digitalocean/master/images/CreateDigitalOceanVM_job.png)
 
 - License
 

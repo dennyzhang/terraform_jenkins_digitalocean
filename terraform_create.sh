@@ -9,10 +9,52 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-08 18:14:37>
+## Updated: Time-stamp: <2018-02-09 15:50:30>
 ##-------------------------------------------------------------------
 set -e
 
+################################################################################
+function prepare_terraform_without_volume() {
+    cat > example.tf <<EOF
+variable "do_token" {}
+
+# Configure the DigitalOcean Provider
+provider "digitalocean" {
+ token = "\${var.do_token}"
+}
+
+resource "digitalocean_droplet" "$vm_hostname" {
+ image = "$vm_image"
+ name = "$vm_hostname"
+ region = "$region"
+ size = "$machine_flavor"
+ $user_data
+ ssh_keys = [$ssh_keys]
+}
+EOF
+}
+
+function prepare_terraform_with_volume() {
+    cat > example.tf <<EOF
+variable "do_token" {}
+
+# Configure the DigitalOcean Provider
+provider "digitalocean" {
+ token = "\${var.do_token}"
+}
+
+resource "digitalocean_droplet" "$vm_hostname" {
+ image = "$vm_image"
+ name = "$vm_hostname"
+ region = "$region"
+ size = "$machine_flavor"
+ $user_data
+ ssh_keys = [$ssh_keys]
+}
+EOF
+}
+
+################################################################################
 function valid_parameters() {
     # TODO: reduce the code duplication
     if [ -z "$vm_hostname" ]; then
@@ -48,32 +90,20 @@ function valid_parameters() {
     fi
 }
 
-function prepare_terraform_template() {
-    cat > example.tf <<EOF
-variable "do_token" {}
-
-# Configure the DigitalOcean Provider
-provider "digitalocean" {
- token = "\${var.do_token}"
-}
-
-resource "digitalocean_droplet" "$vm_hostname" {
- image = "$vm_image"
- name = "$vm_hostname"
- region = "$region"
- size = "$machine_flavor"
- $user_data
- ssh_keys = [$ssh_keys]
-}
-EOF
-}
-
-function create_vm_without_volume() {
+function terraform_create_vm() {
+    local volume_list=${1:-""}
     terraform init
     if [ -z "$provision_sh" ]; then
         user_data=""
     else
         user_data="user_data = \"#cloud-config\nruncmd:\n - wget -O /root/userdata.sh $provision_sh \n - bash /root/userdata.sh\""
+    fi
+
+    # TODO: customize volume creation
+    if [ -n "$volume_list" ]; then
+       prepare_terraform_without_volume
+    else
+       prepare_terraform_with_volume
     fi
 
     prepare_terraform_template
@@ -108,7 +138,9 @@ function run_provision_folder() {
 valid_parameters
 
 terraform_task_id=${1?}
-terraform_tf_file=${2?}
+volume_list=${2:-""}
+# TODO: support more cloud vendors via plugin system
+cloud_driver=${3:-"digitalocean"}
 export vm_image="ubuntu-14-04-x64"
 export working_dir="."
 
@@ -116,7 +148,7 @@ mkdir -p "$working_dir/$terraform_task_id"
 # cp "$terraform_tf_file" "$working_dir/$terraform_task_id/"
 cd "$working_dir/$terraform_task_id"
 
-create_vm_without_volume
+terraform_create_vm "$volume_list"
 # TODO: support creating VM with volumes
 
 if [ -n "$provision_folder" ]; then
