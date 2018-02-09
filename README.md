@@ -34,6 +34,9 @@ export machine_flavor="512mb"
 export region="sfo2"
 export provision_sh="https://raw.githubusercontent.com/DennyZhang/dennytest/master/hashicorp_terraform/userdata.sh"
 export provision_folder="scripts"
+# Once provision_folder is specified, we need to tell where to find the ssh key.
+# Thus we can scp scripts, then run them via ssh
+export ssh_key_file="/tmp/id_rsa"
 
 # export ssh_keys="XXXX"
 # export do_token="XXX"
@@ -43,7 +46,7 @@ export provision_folder="scripts"
 
 vm_without_volume_example.tf: [here](vm_without_volume_example.tf)
 ```
-bash -e terraform_create.sh "$vm_hostname" "vm_without_volume_example.tf" "$provision_folder"
+bash -e terraform_create.sh "$vm_hostname" "vm_without_volume_example.tf"
 
 ## Sample Console Output:
 ##  digitalocean_droplet.denny-vm1: Creating...

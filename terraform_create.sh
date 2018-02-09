@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-08 17:59:01>
+## Updated: Time-stamp: <2018-02-08 18:14:37>
 ##-------------------------------------------------------------------
 set -e
 
@@ -36,9 +36,15 @@ function valid_parameters() {
         exit 1
     fi
 
-    if [ -n "$provision_folder" ] && [ ! -d "$provision_folder" ]; then
-        echo -e "Error: provision_folder is given as $provision_folder. But the folder is not found"
-        exit 1
+    if [ -n "$provision_folder" ]; then
+        if [ ! -d "$provision_folder" ]; then
+            echo -e "Error: provision_folder is given as $provision_folder. But the folder is not found"
+            exit 1
+        fi
+        if [ -z "$ssh_key_file" ] || [ ! -f "$ssh_key_file" ]; then
+            echo -e "ERROR: when provision_folder is given, we need to specify a valid ssh private key file"
+            exit 1
+        fi
     fi
 }
 
@@ -86,8 +92,6 @@ function run_provision_folder() {
     local provision_folder=${1?}
     local vm_ip=${2?}
 
-    # TODO: customize the ssh key
-    local ssh_key_file=${3:-"~/.ssh/id_rsa"}
     local ssh_username="root"
     local ssh_folder="/root"
     local ssh_port="22"
@@ -105,7 +109,6 @@ valid_parameters
 
 terraform_task_id=${1?}
 terraform_tf_file=${2?}
-provision_folder=${3:-""}
 export vm_image="ubuntu-14-04-x64"
 export working_dir="."
 
