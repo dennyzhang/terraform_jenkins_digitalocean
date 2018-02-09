@@ -37,7 +37,7 @@ export vm_hostname="denny-vm1"
 export machine_flavor="512mb"
 export region="sfo2"
 export provision_sh="https://raw.githubusercontent.com/DennyZhang/dennytest/master/hashicorp_terraform/userdata.sh"
-export provision_folder="scripts"
+export provision_folder="$(PWD)/scripts"
 # Once provision_folder is specified, we need to tell where to find the ssh key.
 # Thus we can scp scripts, then run them via ssh
 export ssh_key_file="/tmp/id_rsa"

@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-09 17:25:48>
+## Updated: Time-stamp: <2018-02-09 17:42:42>
 ##-------------------------------------------------------------------
 set -e
 
@@ -168,9 +168,9 @@ if [ -n "$provision_folder" ]; then
     if [ ! -d "$provision_folder" ]; then
         echo "ERROR: Folder($provision_folder) doesn't work"
         exit 1
-        [ -d scripts ] || mkdir -p scripts
-        cp -r $provision_folder/* scripts/
-        run_provision_folder "$vm_ip"
     fi
+    [ -d scripts ] || mkdir -p scripts
+    cp -r $provision_folder/* scripts/
+    run_provision_folder "$vm_ip"
 fi
 ## File: terraform_create.sh ends
