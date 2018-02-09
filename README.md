@@ -26,6 +26,10 @@ Hence here we support you to scp a script folder, find all bash scripts whose fi
 Then run them one by one in lexicographical order
 ```
 
+Convention:
+1. We will upload all scripts under $provision_folder, but only execute scripts of main_*.sh
+2. A system environment of $node_role will be passed, when run remote scripts by ssh
+
 # Create VM With Pure Bash
 - 1 Prepare parameters
 ```

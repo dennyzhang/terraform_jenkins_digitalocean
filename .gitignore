@@ -1,3 +1,4 @@
 scripts/*work_*.sh
 scripts/*mdm_*.sh
+scripts/jenkins_create_and_provision.sh
 denny-vm1

@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-09 17:17:44>
+## Updated: Time-stamp: <2018-02-09 17:25:48>
 ##-------------------------------------------------------------------
 set -e
 
@@ -141,8 +141,8 @@ function run_provision_folder() {
 
     for script in $(ls -1 scripts/main_*.sh); do
         script=$(basename "$script")
-        echo "ssh -i $ssh_key_file -p $ssh_port $ssh_username$vm_ip \"bash -ex $ssh_folder/$script\""
-        ssh -i "$ssh_key_file" -p "$ssh_port" "$ssh_username@$vm_ip" bash -ex "$ssh_folder/$script"
+        echo "ssh -i $ssh_key_file -p $ssh_port $ssh_username$vm_ip \"node_role=$node_role bash -ex $ssh_folder/$script\""
+        ssh -i "$ssh_key_file" -p "$ssh_port" "$ssh_username@$vm_ip" node_role=$node_role bash -ex "$ssh_folder/$script"
     done
 }
 
