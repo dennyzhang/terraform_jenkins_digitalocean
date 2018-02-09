@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-08 16:01:15>
+## Updated: Time-stamp: <2018-02-09 17:18:38>
 ##-------------------------------------------------------------------
 set -e
 if [ -z "$do_token" ]; then
@@ -19,8 +19,8 @@ fi
 
 export working_dir="."
 
-terraform_task_id=${1?}
-cd "$working_dir/$terraform_task_id"
+working_dir=${1?}
+cd "$working_dir"
 # TODO: when deleting, we'd better to ask people to provide both hostname and IP as cross reference
 terraform show
 terraform destroy -force --var="do_token=$do_token"

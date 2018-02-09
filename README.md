@@ -98,12 +98,12 @@ bash -e terraform_create.sh "$vm_hostname"
 
 Create a vm with one additional volume of 20GB disk.
 ```
-bash -e terraform_create.sh "$vm_hostname" "20"
+bash -e terraform_create.sh "/tmp/$vm_hostname" "20"
 ```
 
 - 3 [Optional] Destroy
 ```
-bash -e terraform_destroy.sh "$vm_hostname"
+bash -e terraform_destroy.sh "/tmp/$vm_hostname"
 ```
 
 # Create VM With Jenkins job

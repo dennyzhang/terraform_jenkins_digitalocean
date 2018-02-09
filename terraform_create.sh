@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-09 16:46:32>
+## Updated: Time-stamp: <2018-02-09 17:17:44>
 ##-------------------------------------------------------------------
 set -e
 
@@ -131,34 +131,32 @@ function get_vm_ip() {
 function run_provision_folder() {
     # scp provision folder to root
     # Then run all bash script
-    local provision_folder=${1?}
-    local vm_ip=${2?}
+    local vm_ip=${1?}
 
     local ssh_username="root"
-    local ssh_folder="/root"
+    local ssh_folder="/root/scripts"
     local ssh_port="22"
     echo "scp $provision_folder folder to /root of VM(vm_ip)"
-    scp -P "$ssh_port" -i "$ssh_key_file" -r $provision_folder/* "$ssh_username@$vm_ip:$ssh_folder/"
+    scp -P "$ssh_port" -i "$ssh_key_file" -r scripts/* "$ssh_username@$vm_ip:$ssh_folder/"
 
-    for script in $(ls -1 $provision_folder/main_*.sh); do
+    for script in $(ls -1 scripts/main_*.sh); do
         script=$(basename "$script")
-        echo "ssh -i $ssh_key_file -p $ssh_port $ssh_username$vm_ip \"bash -ex /root/$script\""
-        ssh -i "$ssh_key_file" -p "$ssh_port" "$ssh_username@$vm_ip" bash -ex "/root/$script"
+        echo "ssh -i $ssh_key_file -p $ssh_port $ssh_username$vm_ip \"bash -ex $ssh_folder/$script\""
+        ssh -i "$ssh_key_file" -p "$ssh_port" "$ssh_username@$vm_ip" bash -ex "$ssh_folder/$script"
     done
 }
+
 ################################################################################
 valid_parameters
 
-terraform_task_id=${1?}
+working_dir=${1?}
 volume_list=${2:-""}
 # TODO: support more cloud vendors via plugin system
 cloud_driver=${3:-"digitalocean"}
 export vm_image="ubuntu-14-04-x64"
-export working_dir="."
 
-mkdir -p "$working_dir/$terraform_task_id"
-# cp "$terraform_tf_file" "$working_dir/$terraform_task_id/"
-cd "$working_dir/$terraform_task_id"
+[ -d "$working_dir" ] || mkdir -p "$working_dir"
+cd "$working_dir"
 
 terraform_create_vm "$volume_list"
 
@@ -167,7 +165,12 @@ vm_ip=$(get_vm_ip)
 sleep 15
 
 if [ -n "$provision_folder" ]; then
-    cd ..
-    run_provision_folder "$provision_folder" "$vm_ip"
+    if [ ! -d "$provision_folder" ]; then
+        echo "ERROR: Folder($provision_folder) doesn't work"
+        exit 1
+        [ -d scripts ] || mkdir -p scripts
+        cp -r $provision_folder/* scripts/
+        run_provision_folder "$vm_ip"
+    fi
 fi
 ## File: terraform_create.sh ends
