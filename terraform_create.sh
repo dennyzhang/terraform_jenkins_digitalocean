@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-09 15:58:56>
+## Updated: Time-stamp: <2018-02-09 16:39:24>
 ##-------------------------------------------------------------------
 set -e
 
@@ -35,12 +35,23 @@ EOF
 }
 
 function prepare_terraform_with_volume() {
+    local volume_list=${1?}
+    # TODO: change this
+    volume_name="volume1"
+    volume_size="20"
     cat > example.tf <<EOF
 variable "do_token" {}
 
 # Configure the DigitalOcean Provider
 provider "digitalocean" {
  token = "\${var.do_token}"
+}
+
+resource "digitalocean_volume" "volume1" {
+  region      = "$region"
+  name        = "$volume_name"
+  size        = $volume_size
+  description = "one additional volume"
 }
 
 resource "digitalocean_droplet" "$vm_hostname" {
@@ -50,6 +61,7 @@ resource "digitalocean_droplet" "$vm_hostname" {
  size = "$machine_flavor"
  $user_data
  ssh_keys = [$ssh_keys]
+ volume_ids = ["${digitalocean_volume.volume1.id}"]
 }
 EOF
 }
@@ -103,7 +115,7 @@ function terraform_create_vm() {
     if [ -n "$volume_list" ]; then
        prepare_terraform_without_volume
     else
-       prepare_terraform_with_volume
+       prepare_terraform_with_volume "$volume_list"
     fi
 
     terraform apply -auto-approve --var="do_token=$do_token"
