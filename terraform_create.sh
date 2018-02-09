@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-09 15:50:30>
+## Updated: Time-stamp: <2018-02-09 15:58:56>
 ##-------------------------------------------------------------------
 set -e
 
@@ -106,7 +106,6 @@ function terraform_create_vm() {
        prepare_terraform_with_volume
     fi
 
-    prepare_terraform_template
     terraform apply -auto-approve --var="do_token=$do_token"
     terraform show
 }
@@ -131,7 +130,7 @@ function run_provision_folder() {
     for script in $(ls -1 $provision_folder/main_*.sh); do
         script=$(basename "$script")
         echo "ssh -i $ssh_key_file -p $ssh_port $ssh_username$vm_ip \"bash -ex /root/$script\""
-        ssh -i "$ssh_key_file" -p "$ssh_port" "$ssh_username@$vm_ip" bash -ex /root/$script
+        ssh -i "$ssh_key_file" -p "$ssh_port" "$ssh_username@$vm_ip" bash -ex "/root/$script"
     done
 }
 ################################################################################
@@ -149,10 +148,12 @@ mkdir -p "$working_dir/$terraform_task_id"
 cd "$working_dir/$terraform_task_id"
 
 terraform_create_vm "$volume_list"
-# TODO: support creating VM with volumes
+
+vm_ip=$(get_vm_ip)
+# TODO: Better way to wait for VM slow start, like examining the availability of sshd port(22)
+sleep 15
 
 if [ -n "$provision_folder" ]; then
-    vm_ip=$(get_vm_ip)
     cd ..
     run_provision_folder "$provision_folder" "$vm_ip"
 fi
