@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-09 17:51:56>
+## Updated: Time-stamp: <2018-02-09 19:28:07>
 ##-------------------------------------------------------------------
 set -e
 
@@ -116,6 +116,7 @@ function terraform_create_vm() {
        prepare_terraform_without_volume
     fi
 
+    terraform plan --var="do_token=$do_token"
     terraform apply -auto-approve --var="do_token=$do_token"
     terraform show
 }
