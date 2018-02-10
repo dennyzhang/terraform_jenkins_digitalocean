@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-09 19:29:56>
+## Updated: Time-stamp: <2018-02-09 19:48:12>
 ##-------------------------------------------------------------------
 set -e
 
@@ -161,7 +161,7 @@ terraform_create_vm "$volume_size"
 
 vm_ip=$(get_vm_ip)
 # TODO: Better way to wait for VM slow start, like examining the availability of sshd port(22)
-blind_sleep="15"
+blind_sleep="25"
 sleep "$blind_sleep"
 
 if [ -n "$provision_folder" ]; then
