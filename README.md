@@ -42,6 +42,7 @@ export provision_folder="$(PWD)/scripts"
 # Thus we can scp scripts, then run them via ssh
 export ssh_key_file="/tmp/id_rsa"
 
+export additional_volume_size="5" # craete one additional volume with 5gb. If empty, it will be skipped
 # export ssh_keys="XXXX"
 # export do_token="XXX"
 ```
@@ -49,7 +50,7 @@ export ssh_key_file="/tmp/id_rsa"
 - 2.1 Provision a vm without volumes
 
 ```
-bash -e terraform_create.sh "$vm_hostname"
+bash -e terraform_create.sh "$vm_hostname" "$additional_volume_size"
 
 ## Sample Console Output:
 ##  digitalocean_droplet.denny-vm1: Creating...

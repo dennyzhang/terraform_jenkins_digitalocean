@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-09 17:42:42>
+## Updated: Time-stamp: <2018-02-09 17:51:56>
 ##-------------------------------------------------------------------
 set -e
 
@@ -35,10 +35,7 @@ EOF
 }
 
 function prepare_terraform_with_volume() {
-    local volume_list=${1?}
-    # TODO: change this
-    volume_size="10"
-
+    local volume_size=${1?}
     volume_name="${vm_hostname}-volume1"
     cat > example.tf <<EOF
 variable "do_token" {}
@@ -104,7 +101,7 @@ function valid_parameters() {
 }
 
 function terraform_create_vm() {
-    local volume_list=${1:-""}
+    local volume_size=${1:-""}
     terraform init
     if [ -z "$provision_sh" ]; then
         user_data=""
@@ -113,8 +110,8 @@ function terraform_create_vm() {
     fi
 
     # TODO: customize volume creation
-    if [ -n "$volume_list" ]; then
-       prepare_terraform_with_volume "$volume_list"
+    if [ -n "$volume_size" ]; then
+       prepare_terraform_with_volume "$volume_size"
     else
        prepare_terraform_without_volume
     fi
@@ -137,6 +134,7 @@ function run_provision_folder() {
     local ssh_folder="/root/scripts"
     local ssh_port="22"
     echo "scp $provision_folder folder to /root of VM(vm_ip)"
+    ssh -i "$ssh_key_file" -p "$ssh_port" "$ssh_username@$vm_ip" "mkdir -p $ssh_folder"
     scp -P "$ssh_port" -i "$ssh_key_file" -r scripts/* "$ssh_username@$vm_ip:$ssh_folder/"
 
     for script in $(ls -1 scripts/main_*.sh); do
@@ -150,7 +148,7 @@ function run_provision_folder() {
 valid_parameters
 
 working_dir=${1?}
-volume_list=${2:-""}
+volume_size=${2:-""}
 # TODO: support more cloud vendors via plugin system
 cloud_driver=${3:-"digitalocean"}
 export vm_image="ubuntu-14-04-x64"
@@ -158,11 +156,12 @@ export vm_image="ubuntu-14-04-x64"
 [ -d "$working_dir" ] || mkdir -p "$working_dir"
 cd "$working_dir"
 
-terraform_create_vm "$volume_list"
+terraform_create_vm "$volume_size"
 
 vm_ip=$(get_vm_ip)
 # TODO: Better way to wait for VM slow start, like examining the availability of sshd port(22)
-sleep 15
+blind_sleep="15"
+sleep "$blind_sleep"
 
 if [ -n "$provision_folder" ]; then
     if [ ! -d "$provision_folder" ]; then
