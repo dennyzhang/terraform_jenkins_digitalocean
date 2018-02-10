@@ -9,7 +9,7 @@
 ## Description :
 ## --
 ## Created : <2018-02-07>
-## Updated: Time-stamp: <2018-02-09 19:28:07>
+## Updated: Time-stamp: <2018-02-09 19:29:56>
 ##-------------------------------------------------------------------
 set -e
 
@@ -102,7 +102,6 @@ function valid_parameters() {
 
 function terraform_create_vm() {
     local volume_size=${1:-""}
-    terraform init
     if [ -z "$provision_sh" ]; then
         user_data=""
     else
@@ -116,6 +115,7 @@ function terraform_create_vm() {
        prepare_terraform_without_volume
     fi
 
+    terraform init
     terraform plan --var="do_token=$do_token"
     terraform apply -auto-approve --var="do_token=$do_token"
     terraform show
